@@ -13,7 +13,7 @@ from openalea.mtg.traversal import pre_order
 
 ##############################################################################
 
-class GeometryParameters(object):
+class GeometryParameters:
     def __init__(self):
         # Total length of an element
         self.length = None
@@ -47,11 +47,12 @@ class Weber_MTG(Weber_Laws):
     """
 
     def __init__(self, param, mtg):
-        """ Solve all geometric parameters on a MTG using the Weber and Penn model.
+        """ Solve all geometric parameters on an MTG using the Weber and Penn model.
         :Parameters:
             - param: Parameters of the Weber and Penn model
             - mtg: a multiscale tree graph 
         """
+        super().__init__(param)
         self._mtg = mtg
         self.param = param
         self.g, self.index_map = create_mtg_with_axes(mtg)
@@ -59,8 +60,8 @@ class Weber_MTG(Weber_Laws):
         self.frame = {}
 
     def run(self):
-        ''' Compute the geometric parameters on the MTG.
-        '''
+        """ Compute the geometric parameters on the MTG.
+        """
         root_id = self.get_trunk()
         for axis_id in pre_order(self.g, root_id):
             if axis_id != root_id:
@@ -105,7 +106,7 @@ class Weber_MTG(Weber_Laws):
                 self.frame[v].down = curvature[i - 1]
 
     def get_length(self, vid):
-        """ Compute the length of each elements of an axis.
+        """ Compute the length of each element of an axis.
         """
         g = self.g
         order = self._get_order(vid)
@@ -165,7 +166,6 @@ class Weber_MTG(Weber_Laws):
         """
         g = self.g
         order = self._get_order(vid)
-        nb_nodes = g.nb_components(vid) + 1
         frames = self.frame
         edge_type = g.property('edge_type')
 
@@ -234,13 +234,13 @@ class Weber_MTG(Weber_Laws):
         else:
             # pid is the parent axis to vid
             pid = g.parent(vid)
-            root_id = next(g.components(vid))
+            root_id = next(iter(g.components(vid)))
             offset_id = g.parent(root_id)
             parent_len = frames[pid].length
             parent_radius = frames[pid].radius
             ratio_power = self.param.ratio_power
 
-            length = d = frames[offset_id].offset
+            length = frames[offset_id].offset
             taper = 0.9
             power = 1 - taper * min(1., length / parent_len)
             radius = parent_radius * pow(power, ratio_power)
@@ -323,7 +323,7 @@ def pre_order_turtle(tree, vtx_id, turtle):
 
 
 def create_mtg_with_axes(g):
-    """ Construct a MTG from the finest scale of an existing MTG.
+    """ Construct an MTG from the finest scale of an existing MTG.
     Insert a scale which represent axes.
     """
 

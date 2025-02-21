@@ -1,10 +1,13 @@
 from openalea.mtg import *
+from openalea.plantgl.all import PglTurtle
+
 from openalea.weberpenn.mtg_client import *
-import warnings
+from openalea.weberpenn.tree_client import Quaking_Aspen
 
 try:
     from openalea.grapheditor import dataflowview
-
+except ImportError:
+    pass
 
 
 def default_mtg():
@@ -37,13 +40,13 @@ def default_mtg():
 
 
 def test1():
-    # Build an Tree
+    # Build a Tree
 
     g = default_mtg()
     mtg, index_map = create_mtg_with_axes(g)
     assert len(mtg) == 83
     assert mtg.nb_scales() == 3
-    return mtg
+    assert mtg is not None
 
 
 def test2():
@@ -51,13 +54,13 @@ def test2():
     param = Quaking_Aspen()
     wp = Weber_MTG(param, g)
     wp.run()
-    return wp
+    assert wp is not None
 
 
 def plottest4():
     wp = test2()
     wp.plot()
-    return wp
+    assert wp is not None
 
 
 def test3():
@@ -107,7 +110,7 @@ def test3():
     p.F(10)
     
     p.stopGC()
-    return p
+    assert p is not None
     #Viewer.display(p.getScene())
 
 """

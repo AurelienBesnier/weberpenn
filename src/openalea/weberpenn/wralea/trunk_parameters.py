@@ -1,13 +1,14 @@
-import random
-
 from openalea.core import *
 
-from openalea.weberpenn.tree_client import *
-from openalea.weberpenn.mtg_client import Weber_MTG
-import openalea.weberpenn.tree_server as tree_server
-import openalea.weberpenn.tree_geom as tree_geom
 import openalea.plantgl.all as pgl
+from openalea.core import *
 from openalea.mtg.io import read_mtg_file
+
+import openalea.weberpenn.tree_geom as tree_geom
+import openalea.weberpenn.tree_server as tree_server
+from openalea.weberpenn.mtg_client import Weber_MTG
+from openalea.weberpenn.tree_client import *
+
 
 class WeberPennError(Exception):
     pass

@@ -73,7 +73,7 @@ class GeomEngine:
 
     def scene(self, view="axis", scene=None):
         """
-        Compute a scene from a tree squeleton.
+        Compute a scene from a tree skeleton.
 
         view='axis', 'node', 'polyline' or 'point'
         view specify if we compute a shape by axis, a shape by node
