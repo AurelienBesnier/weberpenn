@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openalea.weberpenn"
+authors = [
+  { name = "Christophe Pradal"},
+]
+description = "Implementation of the tree model published by Weber and Penn"
+license = {file = "LICENSE.txt"}
+requires-python = ">=3.8"
+classifiers = [
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: CeCILL-C License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering",
+]
+dynamic = ["version", "readme"]
+dependencies = [
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+doc = [
+  "pydata-sphinx-theme",
+  "myst-parser",
+  "sphinx-favicon",
+  "ipykernel",
+  "ipyvolume",
+  "ipython_genutils",
+  "nbsphinx",
+]
+
+[project.urls]
+Homepage = "https://openalea.readthedocs.io/"
+"Bug Tracker" = "https://github.com/openalea/weberpenn/issues"
+Discussions = "https://github.com/openalea/weberpenn/discussions"
+Changelog = "https://github.com/openalea/weberpenn/releases"
+
+[project.entry-points."wralea"]
+"weberpenn" = "openalea.weberpenn.wralea"
+"demo" = "openalea.weberpenn.demo"
+
+[tool.setuptools.dynamic]
+version = {attr = "openalea.weberpenn.version.__version__"}
+readme = {file = ["README.rst"]}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["openalea.*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.png"]
