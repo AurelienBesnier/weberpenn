@@ -33,14 +33,14 @@ http://conda.pydata.org/miniconda.html
 
 .. code:: shell
 
-    conda create --name weberpenn openalea.weberpenn -c conda-forge -c openalea3
-    conda activate weberpenn
+    mamba create --name weberpenn openalea.weberpenn -c conda-forge -c openalea3
+    mamba activate weberpenn
 
 (Optional) Install several package managing tools :
 
 .. code:: shell
 
-    conda install notebook nose sphinx sphinx_rtd_theme pandoc coverage
+    mamba install notebook nose sphinx sphinx_rtd_theme pandoc coverage
 
 Authors
 -------
